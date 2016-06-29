@@ -13,7 +13,12 @@ let north = new TrafficLight('North', startTime, 'nts'),
 
 // iterate through each light and run the simulation
 [north].forEach(light => {
-  console.log(light.show());
+
+  while (light.timestamp < endTime)
+  {
+    console.log(light.show());
+    light.transition();
+  }
 
 })
 

@@ -19,12 +19,13 @@ export class TrafficLight {
     this.colour = this.transitionSchedule[0].colour;
   }
 
-  runTransition(timestamp)
+  transition()
   {
     let transition = schedule[this.version % 3];
 
     this.colour     = transition.colour;
     this.version    = this.version +1;
+    this.timestamp  = this.timestamp.seconds(transition.delta);
   }
 
   show()
