@@ -36,6 +36,15 @@ export class TrafficLight {
     return `${this.id}: ${this.timestamp.format('HH:mm:ss')} - ${this.colour} - version: ${this.version}`;
   }
 
+  toJSON() {
+    return {
+      id:         this.id,
+      timestamp:  moment(this.timestamp),
+      colour:     this.colour,
+      version:    this.version
+    }
+  }
+
   // normal transition schedule
   static nts() {
     return [

@@ -14,18 +14,26 @@ let east = new TrafficLight('East', startTime, 'its'),
     west = new TrafficLight('West', startTime, 'its');
 
 // iterate through each light and run the simulation
-[east].forEach(light => {
-  console.log(light.show());
+let transitions = [north, south, east, west].map(light => {
+  let results = [];
+  results.push(light.toJSON())
 
   while (light.timestamp < endTime)
   {
     light.transition();
-    console.log(light.show());
+    results.push(light.toJSON())
   }
+
+  return results;
+});
+
+// flatter the results into a single array
+transitions = [].concat.apply([], transitions);
+
+// sort by the timestamps
+transitions = transitions.sort((a, b) => a.version - b.version);
+
+// print results to screen
+transitions.forEach(t => {
+  console.log(`${t.id}: ${moment(t.timestamp).format('HH:mm:ss')} - ${t.colour}`);
 })
-
-// sort the events to be in order
-events.sort();
-
-// print out to screen
-events.forEach(console.log);
