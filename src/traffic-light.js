@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 export class TrafficLight {
   constructor(id, startTime, transitionSchedule)
   {
@@ -22,24 +24,25 @@ export class TrafficLight {
 
   transition()
   {
-    let transition = this.schedule[this.version % 3];
+    let transition = this.schedule[this.version % 3],
+        timestamp = moment(this.timestamp); // clone before modifying dates
 
     this.colour     = transition.colour;
+    this.timestamp  = timestamp.seconds(transition.delta);
     this.version    = this.version +1;
-    this.timestamp  = this.timestamp.seconds(transition.delta);
   }
 
   show()
   {
-    return `${this.id}: ${this.timestamp.format('HH:mm')} - ${this.colour}`;
+    return `${this.id}: ${this.timestamp.format('HH:mm:ss')} - ${this.colour} - version: ${this.version}`;
   }
 
   // normal transition schedule
   static nts() {
     return [
-      { delta: 270, colour: 'GREEN'  },
-      { delta: 30,  colour: 'YELLOW' },
-      { delta: 300, colour: 'RED'    }
+      { delta: 300, colour: 'GREEN'  },
+      { delta: 270, colour: 'YELLOW' },
+      { delta: 60,  colour: 'RED'    }
     ];
   }
 
@@ -48,7 +51,7 @@ export class TrafficLight {
     return [
       { delta: 300, colour: 'RED'    },
       { delta: 270, colour: 'GREEN'  },
-      { delta: 30,  colour: 'YELLOW' }
+      { delta: 60,  colour: 'YELLOW' }
     ];
   }
 }

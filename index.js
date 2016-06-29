@@ -2,7 +2,7 @@ import moment from 'moment'
 import { TrafficLight } from './src/traffic-light'
 
 let startTime = moment({ hour: 9, minute: 0  }),
-    endTime   = moment({ hour: 9, minute: 10 });
+    endTime   = moment({ hour: 9, minute: 30 });
 
 let normal = [], inverse = [], events = [];
 
@@ -11,14 +11,14 @@ let north = new TrafficLight('North', startTime, 'nts'),
     south = new TrafficLight('South', startTime, 'nts');
 
 // iterate through each light and run the simulation
-[north].forEach(light => {
+[north, south].forEach(light => {
+  console.log(light.show());
 
   while (light.timestamp < endTime)
   {
-    console.log(light.show());
     light.transition();
+    console.log(light.show());
   }
-
 })
 
 // sort the events to be in order
