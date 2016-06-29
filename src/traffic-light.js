@@ -7,7 +7,7 @@ export class TrafficLight {
     this.id = id;
 
     // this lets us know at what point in time we are.
-    this.timestamp = startTime;
+    this.timestamp = moment(startTime);
 
     // the logic for which colour and time offset each transition is at
     this.schedule = (transitionSchedule == 'nts')
@@ -24,11 +24,10 @@ export class TrafficLight {
 
   transition()
   {
-    let transition = this.schedule[this.version % 3],
-        timestamp = moment(this.timestamp); // clone before modifying dates
+    let transition = this.schedule[this.version % 3];
 
     this.colour     = transition.colour;
-    this.timestamp  = timestamp.seconds(transition.delta);
+    this.timestamp  = this.timestamp.seconds(transition.delta);
     this.version    = this.version +1;
   }
 
@@ -49,9 +48,9 @@ export class TrafficLight {
   // inverse transition schedule
   static its() {
     return [
-      { delta: 300, colour: 'RED'    },
-      { delta: 270, colour: 'GREEN'  },
-      { delta: 60,  colour: 'YELLOW' }
+      { delta: 60,  colour: 'RED'    },
+      { delta: 300, colour: 'GREEN'  },
+      { delta: 270, colour: 'YELLOW' }
     ];
   }
 }

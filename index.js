@@ -10,6 +10,9 @@ let normal = [], inverse = [], events = [];
 let north = new TrafficLight('North', startTime, 'nts'),
     south = new TrafficLight('South', startTime, 'nts');
 
+let east = new TrafficLight('East', startTime, 'its'),
+    west = new TrafficLight('West', startTime, 'its');
+
 // iterate through each light and run the simulation
 [north, south].forEach(light => {
   console.log(light.show());
