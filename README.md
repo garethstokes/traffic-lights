@@ -48,31 +48,31 @@ The state of a NTS traffic light will start at RED until 300 seconds pass,
 in which case it will move to GREEN for 270 seconds and then switch to YELLOW
 for the remaining time.
 
-= Seconds vs Minutes
-
-It is much easier to measure time in seconds than minutes as when we use
-seconds then we can use simple modulus mathematics to model the cyclic
-nature of our transition schedules
-
-```
-   // get current time in seconds
-   let ts = new Date().getTime() / 1000;
-
-   // return the seconds modulus 600, aka 10 minutes
-   return ts % 600
-```
-
-== Modelling
+== Modeling
 
 = TrafficLight
    - Properties
-      - lightColor            :: (GREEN, YELLOW, RED)
-      - transitionSchedule    :: (NORMAL, INVERSE)
-      - direction             :: (North, South, East, West)
-   - Methods
-      - start(dateTime);
-      - getDateTimeOfNextStatusChange();  :: DateTime
+    - id          // a unique text string
+    - colour      // RED, GREEN or YELLOW
+    - timestamp   // the timestamp for the colour transition
+    - version     // gets iterated on each colour transition
+    - schedule    // see below
 
-= TrafficLightSet
-   - Properties
-      - trafficLights         :: [TrafficLight]
+   - Methods
+    - transition(); // transition to the next colour and time
+
+```
+  // normal transition schedule
+  [
+    { delta: 270, colour: 'GREEN'  },
+    { delta: 30,  colour: 'YELLOW' },
+    { delta: 300, colour: 'RED'    }
+  ];
+
+  // inverse transition schedule
+  [
+    { delta: 300, colour: 'RED'    },
+    { delta: 270, colour: 'GREEN'  },
+    { delta: 30,  colour: 'YELLOW' }
+  ];
+```
