@@ -1,5 +1,4 @@
 import moment from 'moment'
-
 import { TrafficLight } from './src/traffic-light'
 
 let startTime = moment({ hour: 9, minute: 0  }),

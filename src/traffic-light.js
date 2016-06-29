@@ -4,24 +4,25 @@ export class TrafficLight {
     // id is just a unique string
     this.id = id;
 
-    // the version is incremented after each transition
-    this.version = 0;
-
     // this lets us know at what point in time we are.
     this.timestamp = startTime;
 
     // the logic for which colour and time offset each transition is at
-    this.transitionSchedule = (transitionSchedule == 'nts')
+    this.schedule = (transitionSchedule == 'nts')
         ? TrafficLight.nts()
         : TrafficLight.its();
 
     // calculated by the transition schedule.
-    this.colour = this.transitionSchedule[0].colour;
+    this.colour = this.schedule[0].colour;
+
+    // the version is incremented after each transition
+    this.version = 1;
+
   }
 
   transition()
   {
-    let transition = schedule[this.version % 3];
+    let transition = this.schedule[this.version % 3];
 
     this.colour     = transition.colour;
     this.version    = this.version +1;
