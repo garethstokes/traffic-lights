@@ -86,3 +86,8 @@ for the remaining time.
     { delta: 30,  colour: 'YELLOW' }
   ];
 ```
+
+== TODO
+  - implement dates into unit tests
+  - parameterise the start and end dates
+  - improve sorting
