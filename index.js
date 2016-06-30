@@ -27,10 +27,10 @@ let transitions = [north, south, east, west].map(light => {
   return results;
 });
 
-// flatter the results into a single array
+// flattern the results into a single array
 transitions = [].concat.apply([], transitions);
 
-// sort by the timestamps
+// sort by the versions
 transitions = transitions.sort((a, b) => a.version - b.version);
 
 // print results to screen
