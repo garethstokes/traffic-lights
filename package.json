@@ -5,7 +5,7 @@
   "main": "app/index.js",
   "scripts": {
     "test": "ava",
-    "start": "babel-node index.js"
+    "simulation": "babel-node index.js"
   },
   "author": "gareth stokes",
   "license": "MIT",

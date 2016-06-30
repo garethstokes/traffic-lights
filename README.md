@@ -3,6 +3,16 @@
 Simulate a set of traffic lights
 The traffic lights are designated (N, S) and (E, W) like a compass
 
+== INSTALLATION AND RUNNING
+
+Once you've pulled down the code then use npm to install the dependencies
+and run the simulation.
+
+```
+npm install
+npm run simulation
+```
+
 == PROBLEM
 
 When switching from green to red, the yellow light must be displayed for 30
